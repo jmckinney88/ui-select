@@ -143,7 +143,7 @@ uis.directive('uiSelect',
             contains = element[0].contains(e.target);
           }
 
-          if (!contains && !$select.clickTriggeredSelect) {
+          if (!contains) {
             //Will lose focus only with certain targets
             var focusableControls = ['input','button','textarea'];
             var targetScope = angular.element(e.target).scope(); //To check if target is other ui-select
@@ -152,7 +152,6 @@ uis.directive('uiSelect',
             $select.close(skipFocusser);
             scope.$digest();
           }
-          $select.clickTriggeredSelect = false;
         }
 
         // See Click everywhere but here event http://stackoverflow.com/questions/12931369

@@ -36,7 +36,6 @@ uis.controller('uiSelectCtrl',
   ctrl.tagging = {isActivated: false, fct: undefined};
   ctrl.taggingTokens = {isActivated: false, tokens: undefined};
   ctrl.lockChoiceExpression = undefined; // Initialized inside uiSelectMatch directive link function
-  ctrl.clickTriggeredSelect = false;
   ctrl.$filter = $filter;
 
   ctrl.searchInput = $element.querySelectorAll('input.ui-select-search');
@@ -298,9 +297,6 @@ uis.controller('uiSelectCtrl',
 
         if (ctrl.closeOnSelect) {
           ctrl.close(skipFocusser);
-        }
-        if ($event && $event.type === 'click') {
-          ctrl.clickTriggeredSelect = true;
         }
       }
     }

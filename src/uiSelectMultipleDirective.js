@@ -155,8 +155,13 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
       };
 
       scope.$on('uis:select', function (event, item) {
-        $select.selected.push(item);
-        $selectMultiple.updateModel();
+        // The model should be updated so that selected items may be removed, however
+        // this should be done after the onDocumentClick handler has run so that the
+        // item's list item is still in the DOM.
+        $timeout(function () {
+          $select.selected.push(item);
+          $selectMultiple.updateModel();
+        });
       });
 
       scope.$on('uis:activate', function () {
