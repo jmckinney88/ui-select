@@ -238,7 +238,7 @@ uis.controller('uiSelectCtrl',
 
 
   // When the user selects an item with ENTER or clicks the dropdown
-  ctrl.select = function(item, skipFocusser, $event) {
+  ctrl.select = function(item, skipFocusser) {
     if (item === undefined || !item._uiSelectChoiceDisabled) {
 
       if ( ! ctrl.items && ! ctrl.search ) return;
