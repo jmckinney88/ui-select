@@ -1035,6 +1035,7 @@ describe('ui-select tests', function() {
 
     clickItem(el, 'Samantha');
     clickItem(el, 'Adrian');
+    $timeout.flush();
     el.find('.ui-select-match-item').first().find('.ui-select-match-close').click();
     $timeout.flush();
 
@@ -1065,6 +1066,7 @@ describe('ui-select tests', function() {
 
     clickItem(el, 'Samantha');
     clickItem(el, 'Adrian');
+    $timeout.flush();
     el.find('.ui-select-match-item').first().find('.ui-select-match-close').click();
     $timeout.flush();
 
@@ -1120,6 +1122,7 @@ describe('ui-select tests', function() {
     setSearchText(el, 'idontexist');
 
     triggerKeydown(searchInput, Key.Enter);
+    $timeout.flush();
 
     expect($(el).scope().$select.selected).toEqual(['idontexist']);
   });
@@ -1358,6 +1361,7 @@ describe('ui-select tests', function() {
       var el = createUiSelectMultiple();
       expect(scope.selection.selectedMultiple instanceof Array).toBe(false);
       clickItem(el, 'Samantha');
+      $timeout.flush();
       expect(scope.selection.selectedMultiple instanceof Array).toBe(true);
     });
 
@@ -1547,6 +1551,7 @@ describe('ui-select tests', function() {
         var searchInput = el.find('.ui-select-search');
 
         clickItem(el, 'Wladimir');
+        $timeout.flush();
         expect(scope.selection.selectedMultiple).toEqual([scope.people[5], scope.people[4]]); //Samantha & Wladimir
 
     });
@@ -1605,6 +1610,7 @@ describe('ui-select tests', function() {
 
         triggerKeydown(searchInput, Key.Down)
         triggerKeydown(searchInput, Key.Enter)
+        $timeout.flush();
         expect(scope.selection.selectedMultiple.length).toEqual(2);
 
     });
@@ -1707,6 +1713,7 @@ describe('ui-select tests', function() {
       var searchInput = el.find('.ui-select-search');
 
       clickItem(el, 'Natasha');
+      $timeout.flush();
 
       expect(el.scope().$select.selected).toEqual([scope.people[4], scope.people[5], scope.people[7]]);
       scope.selection.selectedMultiple = ['wladimir@email.com', 'samantha@email.com', 'natasha@email.com'];
@@ -1743,6 +1750,7 @@ describe('ui-select tests', function() {
 
       setSearchText(el, 'n')
       clickItem(el, 'Nicole');
+      $timeout.flush();
 
       expect(el.find('.ui-select-match-item [uis-transclude-append]:not(.ng-hide)').text())
         .toBe("Wladimir <wladimir@email.com>Samantha <samantha@email.com>Nicole <nicole@email.com>");
@@ -1775,6 +1783,7 @@ describe('ui-select tests', function() {
         .toBe("Wladimir <wladimir@email.com>Samantha <samantha@email.com>");
 
       clickItem(el, 'Nicole');
+      $timeout.flush();
 
       expect(el.find('.ui-select-match-item [uis-transclude-append]:not(.ng-hide)').text())
         .toBe("Wladimir <wladimir@email.com>Samantha <samantha@email.com>Nicole <nicole@email.com>");
@@ -1804,6 +1813,7 @@ describe('ui-select tests', function() {
       }
 
       clickItem(el, 'Nicole');
+      $timeout.flush();
 
       expect(scope.counter).toBe(1);
 
@@ -1866,6 +1876,7 @@ describe('ui-select tests', function() {
        var el = createUiSelectMultiple({tagging: 'taggingFunc', taggingTokens: ",|ENTER"});
        clickMatch(el);
        triggerPaste(el.find('input'), 'tag1');
+       $timeout.flush();
 
        expect($(el).scope().$select.selected.length).toBe(1);
     });
@@ -1883,6 +1894,7 @@ describe('ui-select tests', function() {
       var el = createUiSelectMultiple({tagging: 'taggingFunc', taggingTokens: ",|ENTER"});
       clickMatch(el);
       triggerPaste(el.find('input'), ',tag1,tag2,tag3,,tag5,');
+      $timeout.flush();
 
       expect($(el).scope().$select.selected.length).toBe(5);
     });

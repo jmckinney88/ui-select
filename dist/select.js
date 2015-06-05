@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-06-04T21:50:58.167Z
+ * Version: 0.12.0 - 2015-06-05T18:25:57.051Z
  * License: MIT
  */
 
@@ -699,10 +699,11 @@ uis.controller('uiSelectCtrl',
 
   // If tagging try to split by tokens and add items
   ctrl.searchInput.on('paste', function (e) {
-    var data = e.originalEvent.clipboardData.getData('text/plain');
+    var data = (e.originalEvent || e).clipboardData.getData('text/plain');
     if (data && data.length > 0 && ctrl.taggingTokens.isActivated && ctrl.tagging.fct) {
       var items = data.split(ctrl.taggingTokens.tokens[0]); // split by first token only
       if (items && items.length > 0) {
+        _removeDuplicates(items);
         angular.forEach(items, function (item) {
           var newItem = ctrl.tagging.fct(item);
           if (newItem) {
@@ -720,6 +721,22 @@ uis.controller('uiSelectCtrl',
       _resetSearchInput();
     });
   });
+
+  function _removeDuplicates(arr) {
+    var index = 0;
+    while(index < arr.length){
+      var item = arr[index];
+      if(_count(arr, item).length > 1){
+        arr.splice(index, 1);
+      } else {
+        index++;
+      }
+    }
+
+    function _count(a, item){
+      return a.filter(function(arrItem) { return angular.equals(item, arrItem); });
+    }
+  }
 
   // See https://github.com/ivaynberg/select2/blob/3.4.6/select2.js#L1431
   function _ensureHighlightVisible() {
